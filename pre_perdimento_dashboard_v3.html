@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pré-Perdimento | JBS Terminais</title>
+<!-- Dashboard v3 -->
+<style>
+:root{--brand:#232378;--dark:#14143C;--green:#91D700;--blue:#005ABE;--cyan:#1EAAF5;--ice:#C3EBFA;--bg:#F5F7FB;--panel:#fff;--text:#171827;--muted:#6C7488;--border:#E3E7EF;--danger:#D6424C;--warn:#E89B18;--ok:#2A9D5B;--shadow:0 12px 30px rgba(20,20,60,.08)}
+[data-theme=dark]{--bg:#0F1120;--panel:#181B2E;--text:#F4F6FB;--muted:#AAB2C3;--border:#2A304C;--shadow:0 12px 30px rgba(0,0,0,.28)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}button,input,select{font:inherit}.hidden{display:none!important}
+.top{height:74px;background:linear-gradient(135deg,var(--dark),var(--brand));color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:20}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:11px;background:#fff;color:var(--brand);display:grid;place-items:center;font-weight:900}.brand b{font-size:18px}.brand small{display:block;opacity:.75;margin-top:2px}.actions{display:flex;gap:8px}.icon{width:40px;height:40px;border:0;border-radius:10px;background:#ffffff20;color:#fff;cursor:pointer}
+.shell{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 74px)}aside{background:var(--panel);border-right:1px solid var(--border);padding:16px 12px;position:sticky;top:74px;height:calc(100vh - 74px)}.nav{display:flex;flex-direction:column;gap:6px}.nav button{border:0;background:transparent;color:var(--text);padding:11px;border-radius:10px;text-align:left;font-weight:700;cursor:pointer}.nav button.active{background:#23237814;color:var(--brand)}main{padding:22px;min-width:0}.head{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}.head h1{margin:0;font-size:26px}.sub{color:var(--muted);font-size:13px;margin-top:5px}.sync{font-size:12px;color:var(--muted);text-align:right}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:16px}.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;box-shadow:var(--shadow);padding:16px}.metric .label{font-size:12px;color:var(--muted);font-weight:700}.metric .value{font-size:30px;font-weight:900;margin-top:8px}.metric .foot{font-size:11px;color:var(--muted);margin-top:8px}.metric.clickable{cursor:pointer;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}.metric.clickable:hover{transform:translateY(-2px);border-color:#6E78C8;box-shadow:0 14px 34px rgba(20,20,60,.14)}.risk45{border-top:3px solid var(--warn)}.risk75{border-top:3px solid #E4731B}.risk90{border-top:3px solid var(--danger)}.pending{border-top:3px solid var(--blue)}
+.healthstrip{display:grid;grid-template-columns:1.1fr 1fr 1fr .8fr;gap:10px;margin-bottom:16px}.healthitem{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}.healthitem .hk{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.healthitem .hv{font-size:13px;font-weight:800;margin-top:5px;display:flex;align-items:center;gap:7px}.statusdot{width:9px;height:9px;border-radius:50%;display:inline-block}.statusdot.good{background:var(--ok)}.statusdot.stale{background:var(--warn)}.statusdot.bad{background:var(--danger)}.priority-wrap{margin-bottom:16px}.priority-wrap .tablebox{box-shadow:none}.priority-note{font-size:11px;color:var(--muted);margin-top:-7px;margin-bottom:12px}.priority-dwell{font-size:15px;font-weight:900}.priority-row-90{box-shadow:inset 3px 0 0 var(--danger)}.priority-row-75{box-shadow:inset 3px 0 0 #E4731B}.priority-row-45{box-shadow:inset 3px 0 0 var(--warn)}.event-label{display:flex;align-items:center;gap:8px;font-weight:800}.event-detail{font-size:12px;line-height:1.45}.event-sub{font-size:11px;color:var(--muted);margin-top:4px}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:15px;margin-bottom:16px}.title{font-weight:850;margin:0 0 12px;font-size:15px}.bars{display:flex;flex-direction:column;gap:12px}.barrow{display:grid;grid-template-columns:80px 1fr 44px;gap:10px;align-items:center}.track{height:12px;background:var(--bg);border:1px solid var(--border);border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px}.ringwrap{display:flex;gap:24px;align-items:center;justify-content:center;min-height:180px}.ring{width:145px;height:145px;border-radius:50%;position:relative}.ring:after{content:"";position:absolute;inset:23px;border-radius:50%;background:var(--panel)}.ringcenter{position:absolute;inset:0;display:grid;place-items:center;z-index:2;text-align:center}.legend{font-size:12px;line-height:2}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:11px}.field,.select{border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 11px}.field{min-width:240px}.tablebox{background:var(--panel);border:1px solid var(--border);border-radius:15px;overflow:hidden;box-shadow:var(--shadow)}.scroll{overflow:auto;max-height:67vh}table{border-collapse:separate;border-spacing:0;width:100%;min-width:1100px}th{position:sticky;top:0;background:var(--bg);z-index:2;text-align:left;padding:10px;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)}td{padding:10px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:top}.badge{display:inline-flex;padding:4px 8px;border-radius:99px;font-size:10px;font-weight:850;white-space:nowrap}.ok{background:#2A9D5B18;color:var(--ok)}.bad{background:#D6424C18;color:var(--danger)}.warn{background:#E89B181f;color:#A86600}.info{background:#005ABE16;color:var(--blue)}.muted{background:var(--bg);color:var(--muted);border:1px solid var(--border)}.mono{font-family:Consolas,monospace}.event{display:grid;grid-template-columns:170px 180px 1fr;gap:14px;border:1px solid var(--border);border-radius:11px;padding:12px;margin-bottom:9px;background:var(--panel)}.audit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.audit>div{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px}.k{font-size:10px;color:var(--muted);text-transform:uppercase}.v{font-size:13px;font-weight:700;margin-top:6px;word-break:break-word}.empty{text-align:center;color:var(--muted);padding:30px}
+.login{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,var(--dark),var(--brand));display:grid;place-items:center;padding:20px}.loginbox{width:min(420px,100%);background:#fff;padding:25px;border-radius:18px}.loginbox h2{margin:0;color:var(--dark)}.loginbox p{color:#697185;font-size:13px}.loginbox input{width:100%;margin-top:10px;background:#fff;color:#171827}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--green);color:var(--dark);width:100%;margin-top:11px}.err{color:var(--danger);font-size:12px;min-height:18px;margin-top:8px}
+@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.healthstrip{grid-template-columns:repeat(2,1fr)}}@media(max-width:720px){.healthstrip{grid-template-columns:1fr}.shell{grid-template-columns:1fr}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border)}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.head{flex-direction:column}.sync{text-align:left}.audit{grid-template-columns:1fr}.event{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-theme="light">
+<div id="login" class="login"><div class="loginbox"><h2>Pré-Perdimento</h2><p>Entre com o usuário autorizado no Firebase.</p><input id="email" class="field" type="email" placeholder="E-mail"><input id="password" class="field" type="password" placeholder="Senha"><button id="loginBtn" class="btn primary">Entrar</button><div id="loginErr" class="err"></div></div></div>
+<header class="top"><div class="brand"><div class="logo">PP</div><div><b>Pré-Perdimento</b><small>JBS Terminais | Monitoramento de importação</small></div></div><div class="actions"><button id="refresh" class="icon">↻</button><button id="theme" class="icon">◐</button><button id="logout" class="icon">⇥</button></div></header>
+<div class="shell"><aside><nav class="nav"><button class="active" data-tab="overview">Visão Geral</button><button data-tab="units">Unidades</button><button data-tab="alerts">Alertas</button><button data-tab="events">Eventos</button><button data-tab="audit">Auditoria</button></nav></aside><main>
+<section id="overview" class="tab">
+<div class="head">
+  <div><h1>Visão Geral</h1><div class="sub">Referência visual do fluxo de Pré-Perdimento.</div></div>
+  <div class="sync">Última atualização<br><b id="lastSync">-</b></div>
+</div>
+
+<div class="healthstrip">
+  <div class="healthitem"><div class="hk">Último relatório recebido</div><div id="hLastReport" class="hv">-</div></div>
+  <div class="healthitem"><div class="hk">Último processamento</div><div id="hLastProcessed" class="hv">-</div></div>
+  <div class="healthitem"><div class="hk">Próxima execução estimada</div><div id="hNextRun" class="hv">-</div></div>
+  <div class="healthitem"><div class="hk">Status</div><div id="hStatus" class="hv"><span class="statusdot stale"></span>Aguardando</div></div>
+</div>
+
+<div class="cards">
+  <div id="cardActive" class="card metric clickable"><div class="label">Total Ativas</div><div id="mActive" class="value">0</div><div class="foot">Clique para visualizar as unidades ativas</div></div>
+  <div id="cardNoDoc" class="card metric clickable"><div class="label">Sem Instrução</div><div id="mNoDoc" class="value">0</div><div class="foot">Ativas sem instrução documental</div></div>
+  <div id="cardDoc" class="card metric clickable"><div class="label">Com Documento</div><div id="mDoc" class="value">0</div><div class="foot">Ativas com documentação registrada</div></div>
+  <div id="cardPending" class="card metric pending clickable"><div class="label">Alertas Pendentes</div><div id="mPending" class="value">0</div><div class="foot">Fila aguardando envio</div></div>
+
+  <div id="card45" class="card metric risk45 clickable"><div class="label">45+ dias</div><div id="m45" class="value">0</div><div class="foot">Sem instrução documental</div></div>
+  <div id="card75" class="card metric risk75 clickable"><div class="label">75+ dias</div><div id="m75" class="value">0</div><div class="foot">Sem instrução documental</div></div>
+  <div id="card90" class="card metric risk90 clickable"><div class="label">90+ dias</div><div id="m90" class="value">0</div><div class="foot">Sem instrução documental</div></div>
+  <div id="cardSentToday" class="card metric clickable"><div class="label">Enviados Hoje</div><div id="mSentToday" class="value">0</div><div class="foot">Alertas individuais, agrupados por régua nos e-mails</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card"><div class="title">Distribuição por permanência</div><div class="sub" style="margin:-6px 0 12px">Todas as unidades ativas, com ou sem documento.</div><div id="bars" class="bars"></div></div>
+  <div class="card"><div class="title">Situação documental</div><div class="ringwrap"><div id="ring" class="ring"><div class="ringcenter"><div><b id="ringTotal" style="font-size:24px">0</b><br><small>ativas</small></div></div></div><div class="legend"><div><span class="dot" style="background:var(--green)"></span>Sem instrução: <b id="lgNoDoc">0</b></div><div><span class="dot" style="background:var(--cyan)"></span>Com documento: <b id="lgDoc">0</b></div></div></div></div>
+</div>
+
+<div class="card priority-wrap">
+  <div class="title">Prioridades atuais</div>
+  <div class="priority-note">Top 10 unidades ativas sem instrução, ordenadas pela maior permanência.</div>
+  <div class="tablebox"><div class="scroll" style="max-height:360px"><table style="min-width:850px">
+    <thead><tr><th>Container</th><th>Dwell</th><th>Faixa</th><th>Armador</th><th>Consignee</th><th>Posição</th><th>Último alerta</th></tr></thead>
+    <tbody id="priorityBody"></tbody>
+  </table></div></div>
+</div>
+
+<div class="card"><div class="title">Atividade recente</div><div id="recent"></div></div>
+</section>
+<section id="units" class="tab hidden"><div class="head"><div><h1>Unidades</h1><div class="sub">Consulta detalhada das unidades persistidas no Firebase.</div></div><div class="sync"><b id="unitCount">0</b> exibidas</div></div><div class="toolbar"><input id="uSearch" class="field" placeholder="Buscar container, BL, consignee, CE..."><select id="uDoc" class="select"><option value="">Status documental</option><option>SEM INSTRUCAO</option><option>COM DOCUMENTO</option></select><select id="uBand" class="select"><option value="">Faixa</option><option value="LT45">&lt;45</option><option value="45_74">45-74</option><option value="75_89">75-89</option><option value="90_PLUS">90+</option><option value="GE45">45+ (todas)</option><option value="GE75">75+ (todas)</option></select><select id="uActive" class="select"><option value="active">Ativas</option><option value="all">Todas</option><option value="inactive">Inativas</option></select><select id="uLine" class="select"><option value="">Todos os armadores</option></select><button id="exportExcelBtn" class="btn" style="margin-left:auto;background:var(--green);color:var(--dark)">Exportar Excel</button></div><div class="tablebox"><div class="scroll"><table><thead><tr><th>Unit Nbr</th><th>Dwell</th><th>Faixa</th><th>Doc Status</th><th>Doc Type</th><th>Doc Number</th><th>Armador</th><th>Consignee</th><th>BL</th><th>CE Mercante</th><th>I/B Visit</th><th>Posição</th><th>Último Alerta</th><th>Estado</th></tr></thead><tbody id="uBody"></tbody></table></div></div></section>
+<section id="alerts" class="tab hidden"><div class="head"><div><h1>Alertas</h1><div class="sub">Fila e histórico de alertas enviados.</div></div></div><div class="cards"><div class="card metric pending"><div class="label">PENDING</div><div id="aPending" class="value">0</div></div><div class="card metric"><div class="label">SENT</div><div id="aSent" class="value">0</div></div><div class="card metric"><div class="label">CANCELLED</div><div id="aCancelled" class="value">0</div></div><div class="card metric"><div class="label">INITIAL BACKFILL</div><div id="aBackfill" class="value">0</div></div></div><div class="toolbar"><input id="aSearch" class="field" placeholder="Buscar container, destinatário, assunto..."><select id="aState" class="select"><option value="">Todos os estados</option><option>PENDING</option><option>SENT</option><option>CANCELLED</option></select><select id="aStage" class="select"><option value="">Todas as réguas</option><option value="45">45 dias</option><option value="75">75 dias</option><option value="90">90 dias</option></select></div><div class="tablebox"><div class="scroll"><table><thead><tr><th>Unidade</th><th>Régua</th><th>Estado</th><th>Criado</th><th>Enviado</th><th>Destinatário</th><th>Origem</th><th>Assunto</th></tr></thead><tbody id="aBody"></tbody></table></div></div></section>
+<section id="events" class="tab hidden"><div class="head"><div><h1>Eventos</h1><div class="sub">Linha do tempo operacional.</div></div></div><div class="toolbar"><input id="eSearch" class="field" placeholder="Buscar evento ou unidade..."></div><div id="eList"></div></section>
+<section id="audit" class="tab hidden"><div class="head"><div><h1>Auditoria</h1><div class="sub">Metadados e últimos processamentos.</div></div></div><div class="card" style="margin-bottom:15px"><div class="title">Metadados atuais</div><div id="auditGrid" class="audit"></div></div><div class="card"><div class="title">Últimos arquivos processados</div><div class="tablebox" style="box-shadow:none"><div class="scroll"><table><thead><tr><th>Status</th><th>Anexo</th><th>Recebido</th><th>Processado</th><th>Linhas</th><th>Hash</th></tr></thead><tbody id="pBody"></tbody></table></div></div></div></section>
+</main></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";import{getDatabase,ref,get}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+const firebaseConfig={apiKey:"COLE_SUA_FIREBASE_API_KEY_AQUI",authDomain:"perdimento-39811.firebaseapp.com",databaseURL:"https://perdimento-39811-default-rtdb.firebaseio.com",projectId:"perdimento-39811"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app),S={meta:{},units:[],alerts:[],events:[],processed:[],currentUnits:[]};const $=id=>document.getElementById(id),U=v=>(v??"").toString().toUpperCase(),C=v=>(v??"").toString(),N=v=>Number.isFinite(Number(v))?Number(v):0,E=v=>C(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FD=v=>{if(!v)return"-";let d=new Date(v);return isNaN(d)?C(v):new Intl.DateTimeFormat("pt-BR",{dateStyle:"short",timeStyle:"medium",timeZone:"America/Sao_Paulo"}).format(d)};const band=d=>N(d)>=90?"90_PLUS":N(d)>=75?"75_89":N(d)>=45?"45_74":"LT45";const bb=d=>band(d)==="90_PLUS"?'<span class="badge bad">90+</span>':band(d)==="75_89"?'<span class="badge warn">75-89</span>':band(d)==="45_74"?'<span class="badge warn">45-74</span>':'<span class="badge ok">&lt;45</span>';const dbadge=s=>U(s)==="SEM INSTRUCAO"?'<span class="badge bad">SEM INSTRUÇÃO</span>':'<span class="badge ok">COM DOCUMENTO</span>';const ab=s=>U(s)==="SENT"?'<span class="badge ok">SENT</span>':U(s)==="PENDING"?'<span class="badge warn">PENDING</span>':U(s)==="CANCELLED"?'<span class="badge muted">CANCELLED</span>':`<span class="badge muted">${E(s||"-")}</span>`;
+function latest(u){let a=u.alerts||{},x=[{stage:90,...a.d90},{stage:75,...a.d75},{stage:45,...a.d45}].filter(z=>z.state&&!['NOT_DUE','BASELINE'].includes(z.state));x.sort((a,b)=>new Date(b.sentAt||b.createdAt||0)-new Date(a.sentAt||a.createdAt||0));return x[0]||null}
+
+const DAILY_TRIGGER_HOUR=7;
+function tabTo(id){document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$(id).classList.remove('hidden')}
+function openUnits(opt={}){uSearch.value='';uDoc.value=opt.doc||'';uBand.value=opt.band||'';uActive.value=opt.active||'active';uLine.value='';tabTo('units');units()}
+function openAlerts(opt={}){aSearch.value='';aState.value=opt.state||'';aStage.value=opt.stage||'';tabTo('alerts');alerts()}
+function nextRunText(){let now=new Date(),parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hourCycle:'h23'}).formatToParts(now),o={};parts.forEach(p=>o[p.type]=p.value);let y=+o.year,m=+o.month,d=+o.day,h=+o.hour;let base=new Date(Date.UTC(y,m-1,d,DAILY_TRIGGER_HOUR+3,0,0));if(h>=DAILY_TRIGGER_HOUR)base.setUTCDate(base.getUTCDate()+1);let ds=new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeZone:'America/Sao_Paulo'}).format(base);let hs=new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo',hour12:false}).format(base);return ds+' · ~'+hs}
+function healthInfo(){let p=S.meta.lastProcessedAt;if(!p)return{cls:'bad',label:'Sem processamento'};let age=(Date.now()-new Date(p).getTime())/36e5;if(age<=36)return{cls:'good',label:'Operacional'};if(age<=60)return{cls:'stale',label:'Atenção: desatualizado'};return{cls:'bad',label:'Desatualizado'}}
+function friendlyType(t){t=U(t);if(t==='REGULARIZED')return'Regularização documental';if(t==='DOCUMENTATION_REMOVED')return'Documentação removida';if(t==='OUT_OF_REPORT')return'Unidade saiu do relatório';if(t.startsWith('ALERT_PENDING_'))return'Alerta '+t.split('_').pop()+' dias criado';if(t.startsWith('ALERT_SENT_'))return'Alerta '+t.split('_').pop()+' dias enviado';if(t.startsWith('ALERT_CANCELLED_'))return'Alerta '+t.split('_').pop()+' dias cancelado';return C(t||'Evento operacional').replaceAll('_',' ')}
+function eventClass(t){t=U(t);if(t.startsWith('ALERT_SENT'))return'ok';if(t.startsWith('ALERT_PENDING'))return'warn';if(t==='REGULARIZED')return'info';if(t.startsWith('ALERT_CANCELLED')||t==='DOCUMENTATION_REMOVED')return'bad';return'muted'}
+function eventDetail(x){let bits=[];if(x.sentTo)bits.push('Para: '+x.sentTo);if(x.origin)bits.push('Origem: '+x.origin);if(x.reason)bits.push('Motivo: '+x.reason);if(x.previousDocumentStatus)bits.push('Anterior: '+x.previousDocumentStatus);if(x.documentStatus)bits.push('Status: '+x.documentStatus);if(x.dwellDays!=null)bits.push('Dwell: '+x.dwellDays+' dias');return bits.join(' · ')||'Registro operacional'}
+async function load(){let snap=await get(ref(db,"prePerdimento")),d=snap.exists()?snap.val():{};S.meta=d.meta||{};S.units=Object.entries(d.unidades||{}).map(([key,v])=>({key,...v}));S.alerts=Object.entries(d.alertQueue||{}).map(([key,v])=>({key,...v}));S.events=Object.entries(d.eventos||{}).map(([key,v])=>({key,...v}));S.processed=Object.entries(d.processados||{}).map(([key,v])=>({key,...v}));render();$("lastSync").textContent=FD(new Date())}
+function render(){overview();lines();units();alerts();events();audit()}
+function overview(){
+let a=S.units.filter(x=>x.active),n=a.filter(x=>U(x.documentStatus)==="SEM INSTRUCAO"),d=a.filter(x=>U(x.documentStatus)==="COM DOCUMENTO");
+mActive.textContent=a.length;mNoDoc.textContent=n.length;mDoc.textContent=d.length;mPending.textContent=S.alerts.filter(x=>U(x.state)==="PENDING").length;m45.textContent=n.filter(x=>N(x.dwellDays)>=45).length;m75.textContent=n.filter(x=>N(x.dwellDays)>=75).length;m90.textContent=n.filter(x=>N(x.dwellDays)>=90).length;
+let today=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo"}).format(new Date());mSentToday.textContent=S.alerts.filter(x=>U(x.state)==="SENT"&&x.sentAt&&new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo"}).format(new Date(x.sentAt))===today).length;
+
+hLastReport.textContent=FD(S.meta.lastReportReceivedAt||S.meta.lastReportGeneratedAt);
+hLastProcessed.textContent=FD(S.meta.lastProcessedAt||S.meta.lastRunAt);
+hNextRun.textContent=nextRunText();
+let hi=healthInfo();hStatus.innerHTML=`<span class="statusdot ${hi.cls}"></span>${E(hi.label)}`;
+
+let bs=[['<45',a.filter(x=>N(x.dwellDays)<45).length,'var(--green)'],['45-74',a.filter(x=>N(x.dwellDays)>=45&&N(x.dwellDays)<75).length,'var(--warn)'],['75-89',a.filter(x=>N(x.dwellDays)>=75&&N(x.dwellDays)<90).length,'#E4731B'],['90+',a.filter(x=>N(x.dwellDays)>=90).length,'var(--danger)']],mx=Math.max(...bs.map(x=>x[1]),1);
+bars.innerHTML=bs.map(x=>`<div class="barrow"><b>${x[0]}</b><div class="track"><div class="fill" style="width:${x[1]/mx*100}%;background:${x[2]}"></div></div><b>${x[1]}</b></div>`).join('');
+let deg=(n.length/(a.length||1))*360;ring.style.background=`conic-gradient(var(--green) 0 ${deg}deg,var(--cyan) ${deg}deg 360deg)`;ringTotal.textContent=a.length;lgNoDoc.textContent=n.length;lgDoc.textContent=d.length;
+
+let pri=[...n].sort((x,y)=>N(y.dwellDays)-N(x.dwellDays)||C(x.unitNbr).localeCompare(C(y.unitNbr))).slice(0,10);
+priorityBody.innerHTML=pri.length?pri.map(x=>{let l=latest(x),lt=l?`${l.stage}d · ${E(l.state)}`:'-',dw=N(x.dwellDays),rowCls=dw>=90?'priority-row-90':dw>=75?'priority-row-75':dw>=45?'priority-row-45':'';return`<tr class="${rowCls}"><td class="mono"><b>${E(x.unitNbr)}</b></td><td><span class="priority-dwell">${dw}</span></td><td>${bb(x.dwellDays)}</td><td>${E(x.lineOperator||'-')}</td><td>${E(x.consigneeName||x.consignee||'-')}</td><td>${E(x.position||'-')}</td><td>${lt}</td></tr>`}).join(''):'<tr><td colspan="7"><div class="empty">Nenhuma prioridade atual.</div></td></tr>';
+
+let r=[...S.events].sort((x,y)=>new Date(y.at||y.createdAt||y.timestamp||0)-new Date(x.at||x.createdAt||x.timestamp||0)).slice(0,8);
+recent.innerHTML=r.length?r.map(evhtml).join(''):'<div class="empty">Nenhum evento registrado.</div>'
+}
+function lines(){let cur=uLine.value,l=[...new Set(S.units.map(x=>C(x.lineOperator)).filter(Boolean))].sort();uLine.innerHTML='<option value="">Todos os armadores</option>'+l.map(x=>`<option ${x===cur?'selected':''}>${E(x)}</option>`).join('')}
+function units(){let q=U(uSearch.value),doc=uDoc.value,b=uBand.value,ac=uActive.value,ln=uLine.value,r=S.units.filter(x=>{if(ac==='active'&&!x.active||ac==='inactive'&&x.active)return false;if(doc&&U(x.documentStatus)!==U(doc)||ln&&C(x.lineOperator)!==ln)return false;if(b==='GE45'&&N(x.dwellDays)<45)return false;if(b==='GE75'&&N(x.dwellDays)<75)return false;if(b&&!['GE45','GE75'].includes(b)&&band(x.dwellDays)!==b)return false;if(q&&!U([x.unitNbr,x.blNbr,x.consigneeName,x.consignee,x.ceMercante,x.docNumber,x.lineOperator].join(' ')).includes(q))return false;return true}).sort((a,b)=>N(b.dwellDays)-N(a.dwellDays));S.currentUnits=r;unitCount.textContent=r.length;uBody.innerHTML=r.length?r.map(x=>{let l=latest(x),lt=l?`${l.stage}d · ${E(l.state)}${l.sentAt?' · '+FD(l.sentAt):''}`:'-';return`<tr><td class="mono"><b>${E(x.unitNbr)}</b></td><td><b>${N(x.dwellDays)}</b></td><td>${bb(x.dwellDays)}</td><td>${dbadge(x.documentStatus)}</td><td>${E(x.docType||'-')}</td><td class="mono">${E(x.docNumber||'-')}</td><td>${E(x.lineOperator||'-')}</td><td>${E(x.consigneeName||x.consignee||'-')}</td><td class="mono">${E(x.blNbr||'-')}</td><td class="mono">${E(x.ceMercante||'-')}</td><td>${E(x.inboundVisit||'-')}</td><td>${E(x.position||'-')}</td><td>${lt}</td><td>${x.active?'<span class="badge ok">ATIVA</span>':'<span class="badge muted">INATIVA</span>'}</td></tr>`}).join(''):'<tr><td colspan="14"><div class="empty">Nenhuma unidade encontrada.</div></td></tr>'}
+function alerts(){aPending.textContent=S.alerts.filter(x=>U(x.state)==='PENDING').length;aSent.textContent=S.alerts.filter(x=>U(x.state)==='SENT').length;aCancelled.textContent=S.alerts.filter(x=>U(x.state)==='CANCELLED').length;aBackfill.textContent=S.alerts.filter(x=>U(x.origin)==='INITIAL_BACKFILL').length;let q=U(aSearch.value),st=aState.value,sg=aStage.value,r=S.alerts.filter(x=>{if(st&&U(x.state)!==U(st)||sg&&String(x.stage)!==sg)return false;if(q&&!U([x.unitNbr,x.sentTo,x.subject,x.origin].join(' ')).includes(q))return false;return true}).sort((a,b)=>new Date(b.sentAt||b.createdAt||0)-new Date(a.sentAt||a.createdAt||0));aBody.innerHTML=r.length?r.map(x=>`<tr><td class="mono"><b>${E(x.unitNbr||'-')}</b></td><td><span class="badge ${N(x.stage)>=90?'bad':N(x.stage)>=75?'warn':'info'}">${E(x.stage)} dias</span></td><td>${ab(x.state)}</td><td>${FD(x.createdAt)}</td><td>${FD(x.sentAt)}</td><td>${E(x.sentTo||'-')}</td><td>${E(x.origin||'-')}</td><td>${E(x.subject||'-')}</td></tr>`).join(''):'<tr><td colspan="8"><div class="empty">Nenhum alerta encontrado.</div></td></tr>'}
+
+function exportUnitsExcel(){
+  let rows=S.currentUnits||[];
+  if(!rows.length){window.alert('Nenhuma unidade disponível para exportação.');return}
+  let bandLabel=v=>{let b=band(v);return b==='90_PLUS'?'90+':b==='75_89'?'75-89':b==='45_74'?'45-74':'<45'};
+  const headers=[
+    'Unit Nbr','Dwell Days','Faixa','Document Status','Doc Type','Doc Number',
+    'Line Operator','Consignee Name','Consignee','BL Nbr','CE Mercante',
+    'Inbound Visit','Position','Active','Último Alerta','Estado Último Alerta',
+    'Último Alerta Enviado Em'
+  ];
+  const data=rows.map(u=>{
+    const la=latest(u);
+    return [
+      C(u.unitNbr),N(u.dwellDays),bandLabel(u.dwellDays),C(u.documentStatus),
+      C(u.docType),C(u.docNumber),C(u.lineOperator),C(u.consigneeName),
+      C(u.consignee),C(u.blNbr),C(u.ceMercante),C(u.inboundVisit),C(u.position),
+      u.active?'SIM':'NÃO',la?String(la.stage)+' dias':'',la?C(la.state):'',
+      la&&la.sentAt?FD(la.sentAt):''
+    ]
+  });
+  const xe=v=>C(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const rowsXml=[headers,...data].map(r=>'<Row>'+r.map(v=>{
+    const type=typeof v==='number'?'Number':'String';
+    return '<Cell><Data ss:Type="'+type+'">'+xe(v)+'</Data></Cell>'
+  }).join('')+'</Row>').join('');
+  const xml='<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>'+
+    '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" '+
+    'xmlns:o="urn:schemas-microsoft-com:office:office" '+
+    'xmlns:x="urn:schemas-microsoft-com:office:excel" '+
+    'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'+
+    '<Worksheet ss:Name="Unidades"><Table>'+rowsXml+'</Table></Worksheet></Workbook>';
+  const blob=new Blob([xml],{type:'application/vnd.ms-excel;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('a');
+  const date=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()).replaceAll('-','');
+  link.href=url;
+  link.download='PRE_PERDIMENTO_UNIDADES_'+date+'.xls';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),500);
+}
+
+function evhtml(x){
+let unit=x.unitNbr||x.unit||(x.snapshot&&x.snapshot.unitNbr)||'-',type=x.type||x.eventType||'EVENT',dt=x.at||x.createdAt||x.timestamp||x.eventAt;
+return`<div class="event"><div><small>${FD(dt)}</small><br><span class="mono">${E(unit)}</span></div><div><div class="event-label"><span class="badge ${eventClass(type)}">${E(friendlyType(type))}</span></div></div><div class="event-detail">${E(eventDetail(x))}${x.subject?`<div class="event-sub">${E(x.subject)}</div>`:''}</div></div>`
+}
+function events(){let q=U(eSearch.value),r=S.events.filter(x=>!q||U(JSON.stringify(x)).includes(q)).sort((a,b)=>new Date(b.at||b.createdAt||b.timestamp||0)-new Date(a.at||a.createdAt||a.timestamp||0));eList.innerHTML=r.length?r.slice(0,300).map(evhtml).join(''):'<div class="empty">Nenhum evento encontrado.</div>'}
+function audit(){let m=S.meta,ks=[['Baseline criado','baselineCreatedAt'],['Baseline recebido','baselineReportReceivedAt'],['Último anexo','lastAttachmentName'],['Último relatório recebido','lastReportReceivedAt'],['Último processamento','lastProcessedAt'],['Último hash','lastReportHash'],['Carga inicial','initialBackfillCreatedAt'],['Origem carga inicial','initialBackfillOrigin'],['Schema','schemaVersion'],['Time audit','timeAuditVersion']];auditGrid.innerHTML=ks.map(([l,k])=>`<div><div class="k">${l}</div><div class="v ${k.includes('Hash')?'mono':''}">${k.toLowerCase().includes('at')&&m[k]?FD(m[k]):E(m[k]??'-')}</div></div>`).join('');let r=[...S.processed].sort((a,b)=>new Date(b.processedAt||0)-new Date(a.processedAt||0)).slice(0,30);pBody.innerHTML=r.length?r.map(x=>`<tr><td>${E(x.status||'-')}</td><td>${E(x.attachmentName||'-')}</td><td>${FD(x.reportReceivedAt||x.messageDate)}</td><td>${FD(x.processedAt)}</td><td>${E(x.rowCount??'-')}</td><td class="mono">${E((x.key||'').slice(0,18))}${(x.key||'').length>18?'…':''}</td></tr>`).join(''):'<tr><td colspan="6"><div class="empty">Nenhum processamento encontrado.</div></td></tr>'}
+[...document.querySelectorAll('.nav button')].forEach(b=>b.onclick=()=>tabTo(b.dataset.tab));['uSearch','uDoc','uBand','uActive','uLine'].forEach(id=>$(id).oninput=units);['aSearch','aState','aStage'].forEach(id=>$(id).oninput=alerts);eSearch.oninput=events;exportExcelBtn.onclick=exportUnitsExcel;
+cardActive.onclick=()=>openUnits({active:'active'});
+cardNoDoc.onclick=()=>openUnits({active:'active',doc:'SEM INSTRUCAO'});
+cardDoc.onclick=()=>openUnits({active:'active',doc:'COM DOCUMENTO'});
+card45.onclick=()=>openUnits({active:'active',doc:'SEM INSTRUCAO',band:'GE45'});
+card75.onclick=()=>openUnits({active:'active',doc:'SEM INSTRUCAO',band:'GE75'});
+card90.onclick=()=>openUnits({active:'active',doc:'SEM INSTRUCAO',band:'90_PLUS'});
+cardPending.onclick=()=>openAlerts({state:'PENDING'});
+cardSentToday.onclick=()=>openAlerts({state:'SENT'});
+refresh.onclick=load;theme.onclick=()=>{let t=document.body.dataset.theme==='dark'?'light':'dark';document.body.dataset.theme=t;localStorage.setItem('pp-theme',t)};logout.onclick=()=>signOut(auth);loginBtn.onclick=async()=>{loginErr.textContent='';try{await signInWithEmailAndPassword(auth,email.value.trim(),password.value)}catch(e){loginErr.textContent='Falha no login. Verifique usuário e senha.'}};password.onkeydown=e=>{if(e.key==='Enter')loginBtn.click()};onAuthStateChanged(auth,async u=>{if(u){login.classList.add('hidden');await load()}else login.classList.remove('hidden')});document.body.dataset.theme=localStorage.getItem('pp-theme')||'light';
+</script>
+</body></html>
